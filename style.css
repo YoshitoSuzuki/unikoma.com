@@ -1,0 +1,149 @@
+/* --- 前半部分は変更ありませんが、念のため全文掲載します --- */
+
+:root {
+    --primary-color: #007AFF;
+    --text-color: #1D1D1F;
+    --bg-color: #FFFFFF;
+    --gray-bg: #F5F5F7;
+    --accent-blue: #4285F4;
+    --accent-green: #34A853;
+    --accent-yellow: #FBBC05;
+    --accent-red: #EA4335;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--bg-color);
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+/* ヘッダー */
+header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo { font-weight: 700; font-size: 1.5rem; color: var(--text-color); }
+nav ul { display: flex; list-style: none; gap: 30px; }
+nav a { font-size: 0.9rem; color: #666; transition: color 0.3s; }
+nav a:hover, nav a.active { color: var(--primary-color); }
+
+/* ヒーローセクション */
+.hero { background-color: var(--gray-bg); padding: 80px 0; text-align: center; }
+.hero-content { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; }
+.hero-text { flex: 1; min-width: 300px; text-align: left; }
+.hero-text h2 { font-size: 2.5rem; margin-bottom: 20px; line-height: 1.2; }
+.hero-text p { margin-bottom: 30px; color: #666; }
+.app-store-btn img { height: 50px; }
+.hero-image { flex: 1; min-width: 300px; display: flex; justify-content: center; }
+.app-icon-placeholder img { width: 200px; height: 200px; border-radius: 40px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+/* 機能紹介 (SVGアイコン用に修正) */
+.features { padding: 80px 0; }
+.features h3 { text-align: center; font-size: 2rem; margin-bottom: 50px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+
+.feature-card {
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+}
+.feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+/* SVGアイコンのスタイル */
+.feature-card .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: #E8F2FF; /* 薄い青背景 */
+    border-radius: 50%;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+.feature-card .icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* ページコンテンツ共通 */
+.page-content { padding: 60px 0; min-height: 60vh; }
+.page-content h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid var(--gray-bg); padding-bottom: 10px; }
+
+.intro-text {
+    padding-bottom: 30px;
+}
+
+/* FAQ */
+.faq h3 { padding-bottom: 7px; }
+.faq-item { margin-bottom: 15px; border-bottom: 1px solid #eee; }
+.faq-question { background: none; border: none; width: 100%; text-align: left; padding: 15px 0; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer p { padding-bottom: 15px; color: #555; }
+.faq-answer.open { max-height: 200px; }
+
+/* お問い合わせ (メールリンク用スタイル) */
+.contact { margin-top: 60px; }
+.email-box {
+    margin-top: 20px;
+    text-align: center;
+    background: var(--gray-bg);
+    padding: 40px;
+    border-radius: 12px;
+}
+.email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+.email-link:hover { background-color: #005bb5; }
+.email-note { margin-top: 15px; font-size: 0.85rem; color: #888; }
+
+/* プライバシーポリシー */
+.privacy-policy h3 { margin-top: 30px; margin-bottom: 10px; color: var(--primary-color); }
+.update-date { color: #888; font-size: 0.9rem; margin-bottom: 40px; }
+
+/* フッター */
+footer { background: var(--gray-bg); padding: 40px 0; text-align: center; font-size: 0.9rem; color: #888; margin-top: auto; }
+
+/* モバイル対応 */
+.hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+.hamburger span { width: 25px; height: 3px; background-color: var(--text-color); border-radius: 2px; }
+.mobile-nav { display: none; background: white; padding: 20px; border-bottom: 1px solid #eee; }
+.mobile-nav a { display: block; padding: 10px 0; font-weight: bold; }
+
+@media (max-width: 768px) {
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+    .hero-text { text-align: center; }
+    .hero h2 { font-size: 2rem; }
+}
