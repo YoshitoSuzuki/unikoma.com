@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================
-       多言語対応（ローカライズ）の処理
+       多言語対応（ローカライズ）の処理（URL連動型）
        ========================================= */
 
     // デフォルト言語と対応言語のリスト
@@ -56,6 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         return match || DEFAULT_LANG;
     }
+
+    // URLのパスから現在の言語を取得
+    const pathParts = window.location.pathname.split('/');
+    const possibleLang = pathParts[1]; // URLの第1階層（例: /ja/ の "ja"）
+    const urlLang = SUPPORTED_LANGS.includes(possibleLang) ? possibleLang : null;
+
+    // 言語ディレクトリにいない場合、適切な言語のURLへリダイレクト
+    if (!urlLang) {
+        const targetLang = localStorage.getItem('unikoma_lang') || getBrowserLang();
+        
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            // ルートアクセス時はそのまま /ja/ 等へ
+            window.location.replace(`/${targetLang}/`);
+        } else {
+            // /support.html など別ページへの直接アクセスの場合は /ja/support.html へ
+            pathParts.splice(1, 0, targetLang);
+            window.location.replace(pathParts.join('/'));
+        }
+        return; // リダイレクト処理を行うため、これ以降のコードは実行させない
+    }
+
+    // URLから取得した現在の言語をローカルストレージに保存
+    const currentLang = urlLang;
+    localStorage.setItem('unikoma_lang', currentLang);
 
     // 画面のテキストを翻訳データに置き換える
     function applyTranslations(lang) {
@@ -80,27 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = lang;
     }
 
-    // 言語を切り替えてブラウザに保存する
-    function switchLanguage(lang) {
-        applyTranslations(lang);
-        localStorage.setItem('unikoma_lang', lang); 
-        
-        // セレクトボックスの表示も合わせる
-        const selectBox = document.getElementById('lang-select');
-        if (selectBox) selectBox.value = lang;
-    }
+    // 翻訳を適用
+    applyTranslations(currentLang);
 
-    // ページ読み込み時の初期化処理
-    const savedLang = localStorage.getItem('unikoma_lang');
-    const initialLang = savedLang || getBrowserLang();
-    
-    switchLanguage(initialLang);
-
-    // ドロップダウンが変更された時のイベント
+    // ドロップダウンの設定とイベント
     const langSelect = document.getElementById('lang-select');
     if (langSelect) {
+        // セレクトボックスの初期値を現在のURLの言語に合わせる
+        langSelect.value = currentLang;
+        
         langSelect.addEventListener('change', (e) => {
-            switchLanguage(e.target.value);
+            const newLang = e.target.value;
+            localStorage.setItem('unikoma_lang', newLang);
+            
+            // 現在のURLの言語部分（/ja/など）を新しい言語（/da/など）に書き換えて遷移
+            const newPathParts = window.location.pathname.split('/');
+            newPathParts[1] = newLang; 
+            window.location.href = newPathParts.join('/');
         });
     }
 });
