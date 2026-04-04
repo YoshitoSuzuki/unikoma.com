@@ -95,18 +95,53 @@ nav a:hover, nav a.active { color: var(--primary-color); }
 }
 
 /* FAQ */
-.faq h3 { padding-bottom: 7px; }
-.faq-item { margin-bottom: 15px; border-bottom: 1px solid #eee; }
-.faq-question { background: none; border: none; width: 100%; text-align: left; padding: 15px 0; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq h3 {
+    padding-bottom: 7px;
+}
+.faq-item {
+    margin-bottom: 15px; border-bottom: 1px solid #eee;
+}
+.faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
 .faq-answer p { padding-bottom: 15px; color: #555; }
-.faq-answer.open { max-height: 200px; }
-.gb-list_item p {
-    padding-bottom: 1px;
+.faq-answer.open {
+    max-height: 500px;
+}
+.apple-style-list {
+    list-style-type: none;
+    counter-reset: apple-counter;
+    padding-left: 0;
+    margin-bottom: 14px;
+}
+.apple-style-list li {
+    position: relative;
+    padding-left: 24px;
+    padding-bottom: 8px;
     color: #555;
 }
-.gb-list_item {
-    padding-bottom: 14px;
+.apple-style-list li::before {
+    counter-increment: apple-counter;
+    content: counter(apple-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 500;
+    color: var(--text-color);
 }
 
 /* お問い合わせ (メールリンク用スタイル) */
