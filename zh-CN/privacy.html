@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー - UniKoma</title>
+  <title data-i18n="privacy_title">プライバシーポリシー - UniKoma</title>
+  <script src="/assets/js/translations.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -14,11 +15,22 @@
       <h1 class="logo">UniKoma</h1>
       <nav>
         <ul>
-          <li><a href="./">ホーム</a></li>
-          <li><a href="support.html">サポート</a></li>
-          <li><a href="privacy.html" class="active">プライバシー</a></li>
+          <li><a href="./" data-i18n="nav_home">ホーム</a></li>
+          <li><a href="support.html" data-i18n="nav_support">サポート</a></li>
+          <li><a href="privacy.html" class="active" data-i18n="nav_privacy">プライバシー</a></li>
         </ul>
       </nav>
+
+      <select id="lang-select" class="lang-selector">
+        <option value="ja">日本語</option>
+        <option value="en-US">English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="da">Dansk</option>
+        <option value="ko">한국어</option>
+        <option value="zh-CN">简体中文</option>
+        <option value="zh-TW">繁體中文</option>
+      </select>
+
       <div class="hamburger">
         <span></span>
         <span></span>
@@ -28,39 +40,39 @@
   </header>
 
   <div class="mobile-nav">
-    <a href="./">ホーム</a>
-    <a href="support.html">サポート</a>
-    <a href="privacy.html">プライバシー</a>
+    <a href="./" data-i18n="nav_home">ホーム</a>
+    <a href="support.html" data-i18n="nav_support">サポート</a>
+    <a href="privacy.html" data-i18n="nav_privacy">プライバシー</a>
   </div>
 
   <main class="page-content">
     <div class="container privacy-policy">
-      <h2>プライバシーポリシー</h2>
-      <p class="update-date">最終更新日: 2026年2月15日</p>
+      <h2 data-i18n="privacy_title">プライバシーポリシー</h2>
+      <p class="update-date" data-i18n="privacy_update">最終更新日: 2026年5月17日</p>
 
       <section>
-        <h3>1. 個人情報の収集について</h3>
-        <p>本アプリ「UniKoma」（以下、当アプリ）は、利用者の個人情報を収集・送信することはありません。</p>
+        <h3 data-i18n="privacy_s1_title">1. 個人情報の収集について</h3>
+        <p data-i18n="privacy_s1_desc">本アプリ「UniKoma」（以下、当アプリ）は、利用者の個人情報を収集・送信することはありません。</p>
       </section>
 
       <section>
-        <h3>2. データの保存場所</h3>
-        <p>時間割データ、授業メモ、出欠記録などのすべてのデータは、利用者の端末内（ローカルストレージ）にのみ保存されます。開発者がこれらのデータにアクセスすることは技術的に不可能です。</p>
+        <h3 data-i18n="privacy_s2_title">2. データの保存場所</h3>
+        <p data-i18n="privacy_s2_desc">時間割データ、授業メモ、出欠記録、カレンダーの予定などのすべてのデータは、利用者の端末内（ローカルストレージ）または利用者が設定したiCloudバックアップにのみ保存されます。開発者がこれらのデータにアクセスすることは技術的に不可能です。</p>
       </section>
 
       <section>
-        <h3>3. 外部サービスとの連携</h3>
-        <p>当アプリは、iCloudバックアップ機能を利用する場合を除き、外部サーバーへのデータ送信を行いません。</p>
+        <h3 data-i18n="privacy_s3_title">3. 外部サービスとの連携</h3>
+        <p data-i18n="privacy_s3_desc">当アプリは、iCloudバックアップ機能を利用する場合を除き、外部サーバーへのデータ送信を行いません。</p>
       </section>
 
       <section>
-        <h3>4. 免責事項</h3>
-        <p>当アプリの利用により生じた、いかなる損害についても、開発者は責任を負わないものとします。</p>
+        <h3 data-i18n="privacy_s4_title">4. 免責事項</h3>
+        <p data-i18n="privacy_s4_desc">当アプリの利用により生じた、いかなる損害についても、開発者は責任を負わないものとします。</p>
       </section>
 
       <section>
-        <h3>5. お問い合わせ</h3>
-        <p>本ポリシーに関するご質問は、サポートページよりお問い合わせください。</p>
+        <h3 data-i18n="privacy_s5_title">5. お問い合わせ</h3>
+        <p data-i18n="privacy_s5_desc">本ポリシーに関するご質問は、サポートページよりお問い合わせください。</p>
       </section>
     </div>
   </main>
