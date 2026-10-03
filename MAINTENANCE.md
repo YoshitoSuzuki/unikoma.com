@@ -8,11 +8,15 @@
 
 このサイトは、ルートディレクトリにある「ベースとなるHTML」を元に、各言語用のディレクトリ（`/ja/`, `/da/` など）とHTMLをNode.jsスクリプトで自動生成する仕組みになっています。
 
-* **`index.html`, `support.html`, `privacy.html` (ルート階層)**
+* **`index.html`, `support/index.html`, `privacy/index.html` (ルート階層)**
     * ベースとなるテンプレート用HTMLファイルです。**HTMLの構造（タグの追加や削除）を変更する場合は、必ずこの階層のファイルを編集します。**
+* **`support.html`, `privacy.html` (ルート階層)**
+    * 旧URLからの転送ページです。中身は `/support/` `/privacy/` へ飛ばすだけなので編集しません。
 * **`build.js`**
     * ルートのHTMLファイルを読み込み、各言語用のディレクトリを生成し、その中にHTMLを複製するビルドスクリプトです。
-    * 複製時、`<html lang="ja">` の言語タグを各言語に書き換え、`href="index.html"` を `href="./"` に変換してURLをスッキリさせる処理を行っています。
+    * 複製時、`<html lang="ja">` の言語タグを各言語に書き換え、ナビゲーションのリンクを
+      `/ja/support/` のように**その言語ディレクトリ配下のルート相対パス**へ書き換えます。
+    * 各言語ディレクトリにも旧URL（`/ja/support.html` など）からの転送ページを生成します。
 * **`style.css`, `script.js`, `translations.js`**
     * 全言語ページから共通で読み込まれるアセットファイルです。
     * 各言語のHTMLからは、絶対パス（例: `src="/script.js"`）で読み込まれます。
@@ -69,5 +73,14 @@
 * **JavaScriptによるURL連動ルーティング:**
     * `script.js` にて、アクセスされたURLのパス（`window.location.pathname`）を解析しています。
     * ルート（`/`）にアクセスされた場合、ブラウザの言語設定やローカルストレージ（`localStorage`）の履歴を参照し、適切な言語のディレクトリ（例: `/ja/`）へ自動的にリダイレクトさせます。
-* **URLのクリーン化 (`href="./"`):**
-    * `build.js` 内で `index.html` へのリンクを `./` に置換することで、ブラウザのアドレスバーに `unikoma.com/ja/index.html` と表示されるのを防ぎ、 `unikoma.com/ja/` というスッキリとしたURLを保つようにしています。
+* **URLにファイル名を出さない (2026-10-03〜):**
+    * 公開するURLは `unikoma.com/ja/support/` の形にしています（`support.html` を出さない）。
+      ページごとにディレクトリを切り、中に `index.html` を置く構成です。
+    * ページの階層が深くなるため、**CSS・JS・リンクはすべてルート相対**（`/assets/...`,
+      `/ja/support/`）で書きます。相対パスで書くと `/ja/support/` の中で壊れます。
+    * 旧URL（`/support.html`, `/ja/support.html` など）は転送ページとして残してあります。
+      **GitHub Pages はサーバー側で 301 を返せない**ので、`<link rel="canonical">` と
+      `<meta http-equiv="refresh">`、`location.replace()` の3つで新URLへ送っています。
+      検索エンジンには canonical が効くので、旧URLが残り続けることはありません。
+    * これらの転送ページは消さないこと（App Store Connect に登録したURLや、
+      過去に配布したリンクが旧URLのままのため）。
